@@ -9,7 +9,7 @@ class Model {
   }
 
   get(id) {
-    let response = id ? this.database.filter((record) => record.id === id) : this.database;
+    let response = id ? this.database.filter( record => record.id === id) : false;
     return Promise.resolve(response);
   }
 
@@ -22,25 +22,30 @@ class Model {
 
   update(id, entry) {
     let record = this.sanitize(entry);
-    if (record.id) { this.database = this.database.map((item) => (item.id === id) ? record : item); }
+    if ( record ) {
+      record.id = id;
+      this.database = this.database.map( item => {
+        if ( item.id === id ){
+          item = record;
+          return item;
+        }
+      });
+    }
     return Promise.resolve(record);
   }
 
   delete(id) {
-    this.database = this.database.filter((record) => record.id !== id);
-    return Promise.resolve();
+    this.database = this.database.filter( record => record.id !== id);
+    return Promise.resolve(id);
   }
 
-	// Vinicio - this would be our 'isValid', but it changes the data if it finds anything wrong
   sanitize(entry) {
 
     let valid = true;
     let record = {};
-		// Vinicio - this code is checking that properties are present in objects
-		// Vinicio - your goal is to change that to check for types as well
-		// Please take inspiration from lab 02
 
     Object.keys(this.schema).forEach(field => {
+      valid = true;
       if (this.schema[field].required) {
         if (entry[field]) {
           record[field] = entry[field];
@@ -52,7 +57,6 @@ class Model {
         record[field] = entry[field];
       }
     });
-
     return valid ? record : undefined;
   }
 
