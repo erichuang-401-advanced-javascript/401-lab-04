@@ -1,0 +1,24 @@
+{
+  "name": "401-lab-04",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erichuang-401-advanced-javascript/401-lab-04.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erichuang-401-advanced-javascript/401-lab-04/issues"
+  },
+  "homepage": "https://github.com/erichuang-401-advanced-javascript/401-lab-04#readme",
+  "dependencies": {
+    "jest": "^24.8.0",
+    "uid": "0.0.2"
+  }
+}
